@@ -9,3 +9,15 @@ body {
     padding: 0; 
     margin: 0;
 }
+
+.userheader {
+    position:fixed; 
+    margin-top: 0; 
+    top: 0;
+    width:100%; 
+    z-index:9999;
+}
+
+.headerBlank {
+    margin-top: 4em;
+}
