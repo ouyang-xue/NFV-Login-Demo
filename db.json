@@ -1,0 +1,40 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "fullname": "admin",
+            "password": "1234",
+            "role": 0,
+            "token": {
+            "id": 1,
+            "token": "07bdf0a5-2b13-4b73-b743-a3fe962557f1",
+            "expiryDate ": 1422955762006
+          }
+        },
+        {
+            "id": 2,
+            "username": "user1",
+            "fullname": "John Doe",
+            "password": "1234",
+            "role": 1,
+            "token": {
+              "id": 1,
+              "token": "abcdefg-2b13-4b73-b743-a3fe962557f1",
+              "expiryDate ": 1422955762006
+            }
+        },
+        {
+            "id": 3,
+            "username": "user2",
+            "fullname": "Israela Israeli",
+            "password": "1234",
+            "role": 2,
+            "token": {
+              "id": 1,
+              "token": "abcdefg-2b13-4b73-b743-aaabbbccceeee",
+              "expiryDate ": 1422955762006
+            }
+        }
+    ]
+}
