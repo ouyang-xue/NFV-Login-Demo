@@ -23,6 +23,7 @@
     "ag-grid": "^18.1.2",
     "ag-grid-angular": "^21.2.0",
     "ag-grid-community": "^21.2.0",
+    "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "font-awesome": "^4.7.0",
     "primeicons": "^2.0.0",

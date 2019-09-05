@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 
 import {ButtonModule} from 'primeng/button';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToolbarModule } from 'primeng/toolbar';
+import {PasswordModule} from 'primeng/password';
+import {InputTextModule} from 'primeng/inputtext';
 
 
 @NgModule({
@@ -12,7 +15,10 @@ import { ToolbarModule } from 'primeng/toolbar';
   exports: [
     ButtonModule,
     SplitButtonModule,
-    ToolbarModule
+    ToolbarModule,
+    PasswordModule,
+    InputTextModule,
+    FormsModule
   ],
   providers: [
   ]
