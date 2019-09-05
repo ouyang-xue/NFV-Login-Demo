@@ -15,6 +15,7 @@ import {DropdownModule} from 'primeng/dropdown';
   imports: [],
   declarations: [],
   exports: [
+    BrowserAnimationsModule,
     ButtonModule,
     SplitButtonModule,
     ToolbarModule,
