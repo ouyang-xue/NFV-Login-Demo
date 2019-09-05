@@ -1,33 +1,63 @@
+@import "../../../variables";
+
+$blur: 150px;
+$compWidth: 260px;
 
 .container {
-    background-image: linear-gradient(to bottom,#2bc0ec,#1b81d7);
     color: #fff;
     text-align: center;
-    height: 750px;
 }
 
 .welcome {
-    // background-color: green;
     padding-top: 20px;
-    padding-bottom: 100px;
+    padding-bottom: 20px;
 }
 
-.login-form {
-    // background-color: rgb(204, 204, 107);
+.content {
+    margin: 0 auto;
+    width: 500px;
+    height: 300px;
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    background-position: center top;
+    background-size: cover;
+    z-index: 1;
+    box-shadow: 0 0 0 1px hsla(240,0%,100%,.3) inset,
+    .1em .3em 1em rgba(7, 0, 100, 0.6);
+    overflow: hidden;
+}
+.content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-filter: blur($blur);
+    -moz-filter: blur($blur);
+    -ms-filter: blur($blur);
+    -o-filter: blur($blur);
+    filter: blur($blur);
+    z-index: -3;
+    margin: -30px;
+    background-image: url($background);
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .login-info {
-    // background-color: #eb9bd7;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .username {
-    width: 260px;
+    width: $compWidth;
 }
 
 .password {
-    width: 260px;
+    width: $compWidth;
 }
 
 .ng-valid[required], .ng-valid.required {
@@ -35,10 +65,30 @@
 }
 
 .ng-invalid:not(form) {
-    border-left: 5px solid #a94442;
+    border-left: 5px solid #af2e2e;
 }
 
 .errMsg {
-    font-size: 15px;
-    color: red;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
 }
+
+.forgot-div {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: $compWidth;
+    text-align: right;
+}
+
+.forgot {
+    color: #d8d5d5;
+    position: relative;
+    right: 0;
+}
+
+.loginBtn {
+    width: $compWidth;
+    color: white;
+    background-color: rgb(25, 0, 138);
+}
+

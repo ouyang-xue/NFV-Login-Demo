@@ -1,23 +1,14 @@
-<<<<<<< ours
+
 <div class="container">
     <h1 class="welcome">Welcome to users management</h1>
-    <form #loginForm="ngForm" class="login-form" (submit)="loginData()">
-        <h3>Login</h3>
+    <div class="content">
+        <form #loginForm="ngForm" class="login-form" (submit)="loginData()">
+            <h3>Login</h3>
             <div class="login-info">
                 <span>
-                    <input type="text" 
-                        class="username" 
-                        name="username"
-                        pInputText 
-                        placeholder="Username" 
-                        [(ngModel)]="loginFormData.username"
-                        required
-                        minlength="{{ unameMinLen }}"
-                        #uname="ngModel"
-                    />
-                    <div 
-                        *ngIf="uname.invalid && (uname.dirty || uname.touched)" 
-                        class="errMsg">
+                    <input type="text" class="username" name="username" pInputText placeholder="Username"
+                        [(ngModel)]="loginFormData.username" required minlength="{{ unameMinLen }}" #uname="ngModel" />
+                    <div *ngIf="uname.invalid && (uname.dirty || uname.touched)" class="errMsg">
                         <div *ngIf="uname.errors.required">
                             Username is required.
                         </div>
@@ -25,27 +16,17 @@
                             Username must be at least {{ unameMinLen }} characters long.
                         </div>
                     </div>
-
+    
                 </span>
             </div>
-            
+    
             <div class="login-info">
                 <div>
-                    <input type="password" 
-                        class="password" 
-                        name="password"
-                        pPassword 
-                        placeholder="Password" 
-                        [(ngModel)]="loginFormData.password"
-                        required
-                        minlength="{{ psdMinLen }}"
-                        maxlength="{{ psdMaxLen }}"
-                        #pwd="ngModel"
-                    />
-
-                    <div 
-                        *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)" 
-                        class="errMsg">
+                    <input type="password" class="password" name="password" pPassword placeholder="Password"
+                        [(ngModel)]="loginFormData.password" required minlength="{{ psdMinLen }}"
+                        maxlength="{{ psdMaxLen }}" #pwd="ngModel" />
+    
+                    <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)" class="errMsg">
                         <div *ngIf="pwd.errors.required">
                             Password is required.
                         </div>
@@ -56,18 +37,18 @@
                             Password must be at most {{ psdMaxLen }} characters long.
                         </div>
                     </div>
-                            
+    
                 </div>
             </div>
-            
-            <button 
-                pButton 
-                type="submit" 
-                label="Login"
-                [disabled]="!loginForm.form.valid"
-            ></button>
+
+            <div class="forgot-div">
+                <a class="forgot" href="#">Forgot Password?</a>
+            </div>
     
-    </form>
+            <button pButton class="loginBtn" type="submit" label="Login" [disabled]="!loginForm.form.valid"></button>
+    
+        </form>
+    </div>
+
 </div>
-=======
->>>>>>> theirs
+
