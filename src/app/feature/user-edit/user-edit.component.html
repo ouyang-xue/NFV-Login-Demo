@@ -1,4 +1,93 @@
+<app-header class="userheader" [title]="title"></app-header>
 
-<app-header [title]="title"></app-header>
+<form #btnD="ngForm" action="">
+    <br><br><br><br>
+    <div class="content-section headerBlank">
+        <div class="full-name">
+            <div class="ui-inputgroup">
+                <font>Full name：</font>
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input name="fullName" [(ngModel)]="user.fullname" required type="text" pInputText
+                    placeholder="Fullname" #fullname="ngModel" minlength={{psdMinLen}} maxlength={{psdMaxLen}} />
+            </div>
+            <div class="err">
+                <span  *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)"   class="errMsg">
+                    <span *ngIf="fullname.errors.required">
+                        Full name is required.
+                    </span>
+                    <span *ngIf="fullname.errors.minlength">
+                        Full name must be at least {{ psdMinLen }} characters long.
+                    </span>
+                    <span *ngIf="fullname.errors.maxlength">
+                        Full name must be at most {{ psdMaxLen }} characters long.
+                    </span>
+                </span>
+            </div>
+        </div>
 
-<p>user-edit works!</p>
+        <br><br><br><br>
+        <div *ngIf="btnDisplay===1">
+                <br><br><br><br>
+        </div>
+        <div class="user-name">
+            <div class="ui-inputgroup">
+                <font>Username：</font>
+                <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                <input name="username" [(ngModel)]="user.username" required type="text" pInputText
+                    placeholder="Username" #username="ngModel" minlength={{psdMinLen}} maxlength={{psdMaxLen}} />
+            </div>
+            <div class="err">
+                <span  *ngIf="username.invalid && (username.dirty || username.touched)"   class="errMsg">
+                    <span *ngIf="username.errors.required">
+                        User name is required.
+                    </span>
+                    <span *ngIf="username.errors.minlength">
+                        User name must be at least {{ psdMinLen }} characters long.
+                    </span>
+                    <span *ngIf="username.errors.maxlength">
+                        User name must be at most {{ psdMaxLen }} characters long.
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <br><br><br><br>
+
+        <div *ngIf="btnDisplay===0" class="password">
+            <div class="ui-inputgroup">
+                <font>Password：</font>
+                <span class="ui-inputgroup-addon">P</span>
+                <input #pwd="ngModel" name="password" [(ngModel)]="user.pwassword" required type="password" pPassword
+                    placeholder="Password" minlength={{psdMinLen}} maxlength={{psdMaxLen}} />
+            </div>
+            <div class="err">
+                <span  *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)"   class="errMsg">
+                    <span *ngIf="pwd.errors.required">
+                        Password is required.
+                    </span>
+                    <span *ngIf="pwd.errors.minlength">
+                        Password must be at least {{ psdMinLen }} characters long.
+                    </span>
+                    <span *ngIf="pwd.errors.maxlength">
+                        Password must be at most {{ psdMaxLen }} characters long.
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <br><br><br><br>
+        <div class="roleSelect">
+            <font>Role：</font>
+            <p-dropdown [options]="cars" name="roleSelect" [(ngModel)]="user.role"></p-dropdown>
+        </div>
+
+        <div class="submitBtn">
+            <button *ngIf="btnDisplay===0" [disabled]="!btnD.form.valid" (click)="submit()" pButton type="button"
+                label="Add" class="ui-button-secondary"></button>
+
+            <button [disabled]="!btnD.form.valid" *ngIf="btnDisplay===1" (click)="submit()" pButton type="button"
+                label="Edit" class="ui-button-secondary"></button>
+
+        </div>
+    </div>
+</form>

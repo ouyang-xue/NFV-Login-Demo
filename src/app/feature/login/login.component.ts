@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {Md5} from 'ts-md5';
+import { Password } from 'primeng/password';
+
 
 @Component({
   selector: 'app-login',
@@ -17,6 +20,12 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   }
+
+  cloneFormData = {
+    username: '',
+    password: ''
+  }
+  
   constructor(
     private http: HttpClient,
     private router: Router
@@ -25,35 +34,25 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  
   loginData() {
 
-    console.log("提交表单");
+    this.cloneFormData.username = this.loginFormData.username;
+    this.cloneFormData.password = Md5.hashStr(this.loginFormData.password).toString();
 
-    const formData = this.loginFormData;
-    this.http.post('http://localhost:3000/users', formData).toPromise().then((data:any) => {
-      console.log(data);
-      window.localStorage.setItem('auth_token', data.token);
-      this.router.navigate(['/users']);
+    this.http.post('http://localhost:3000/users', this.cloneFormData).toPromise().then((data:any) => {
+        
+        if(data.token == null ){
+          window.alert("Error username or password!");
+          return;
+        }
+        
+        window.localStorage.setItem('auth_token', data.token);
+        window.localStorage.setItem('id', data.id);
+        this.router.navigate(['/users']);
 
-    }).catch(err  => {
-      window.alert(err);
+      }).catch(err  => {
+        window.alert(err);
     })
-  }
-
-  private users: any[] = [];
-  private testDatas: string = "";
-
-  getUsers() {
-    this.http.get('http://localhost:3000/users').toPromise().then((data: any) => {
-      console.log(data);
-      this.users = data;
-
-      this.testDatas = JSON.stringify(this.users);
-      
-      
-    }).catch(err => {
-      console.log(err);
-      
-    });
   }
 }

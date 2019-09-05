@@ -1,0 +1,64 @@
+
+
+.content-section{
+    margin: 0;
+    padding: 0
+}
+
+.full-name{
+    margin-left: 20% ;
+    padding-left : 200px;
+    padding-top: 100px; 
+    width: 900px
+}
+
+.user-name{
+    margin-left: 20% ;
+    padding-left : 196px; 
+    width: 900px
+}
+
+.password{
+    margin-left: 20% ;
+    padding-left : 200px; 
+    width: 900px
+}
+
+.roleSelect{
+    margin-left: 21% ;
+    padding-left : 200px; 
+
+}
+.roleSelect p-dropdown {
+    padding-left : 15px; 
+    width: 900px
+}
+
+.submitBtn{
+    margin-left: 30% ;
+    margin-top: 4rem;
+    padding-left : 200px; 
+}
+
+font{
+    color: white; 
+    size: 16px;
+    font-weight:bold;
+    padding-right: 200px;
+    padding-top: 5px;
+}
+.password font{
+    color: white; 
+    size: 14px;
+    padding-right: 200px;
+    padding-top: 10px;
+}
+
+.err {
+    padding-left : 39%; 
+}
+
+.errMsg{
+    color: rgb(238, 230, 230);
+}
+
