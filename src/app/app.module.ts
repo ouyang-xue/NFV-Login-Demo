@@ -11,20 +11,24 @@ import { UserEditComponent } from './feature/user-edit/user-edit.component';
 import { UsersComponent } from './feature/users/users.component';
 import { HeaderComponent } from './feature/header/header.component';
 import { ShareModule } from './feature/share/share.module';
-
+import { AgGridModule } from 'ag-grid-angular';
+import { ActionByUserListComponent } from './feature/users/action-by-user-list/action-by-user-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UsersComponent,
     UserEditComponent,
-    HeaderComponent
+    HeaderComponent,
+    ActionByUserListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ShareModule,
-    HttpClientModule
+    HttpClientModule,
+    //定义为子组件 renderer的需要在这里调用
+    AgGridModule.withComponents([ActionByUserListComponent])
   ],
   providers: [],
   bootstrap: [AppComponent],

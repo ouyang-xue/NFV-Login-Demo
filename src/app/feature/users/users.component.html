@@ -1,6 +1,13 @@
+<app-header class="userheader" [title]="title"></app-header>
 
-<app-header [title]="title"></app-header>
-
-<p>{{testDatas}}</p>
-
-
+<ag-grid-angular
+  #agGrid
+  class="ag-theme-balham headerBlank"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  (gridReady)="onGridReady($event)"
+  [context]="context"
+  [frameworkComponents]="frameworkComponents"
+>
+</ag-grid-angular>
+<a class="fa fa-plus-circle fa-3x addBtn" (click)="addItem()"></a>
