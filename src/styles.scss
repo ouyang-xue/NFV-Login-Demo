@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "variables";
 
 body {
     padding: 0; 
     margin: 0;
+    width: 100%;
 
-    background: url('/assets/images/bg_blue.jpg') no-repeat fixed;
+    background: url($background) no-repeat fixed;
     background-size: 100%;
 }
 
