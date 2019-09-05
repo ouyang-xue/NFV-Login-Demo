@@ -2,11 +2,16 @@
 
 @import "variables";
 
-body {
+html, body {
+    height: 100%;
+    width: 100%;
     padding: 0; 
     margin: 0;
-    width: 100%;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
 
+body {
     background: url($background) no-repeat fixed;
     background-size: 100%;
 }
@@ -20,5 +25,5 @@ body {
 }
 
 .headerBlank {
-    margin-top: 4em;
+    margin-top: 6em;
 }
