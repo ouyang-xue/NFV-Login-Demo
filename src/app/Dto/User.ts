@@ -4,5 +4,4 @@ class User {
     fullname: string;
     pwd: string;
     role: number;
-    token: Token;
 }
