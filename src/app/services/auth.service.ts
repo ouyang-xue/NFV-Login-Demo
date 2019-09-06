@@ -10,4 +10,8 @@ export class AuthService {
   getAuthorizationToken(): string {
     return window.localStorage.getItem("auth_token");
   }
+
+  removeAuthorizationToken(): void {
+    window.localStorage.removeItem("auth_token");
+  }
 }
