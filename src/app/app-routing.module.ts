@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './feature/login/login.component';
 import { UsersComponent } from './feature/users/users.component';
 import { UserEditComponent } from './feature/user-edit/user-edit.component';
+import { LayoutComponent } from './feature/layout/layout.component';
 
 const routes: Routes = [
   {
@@ -12,18 +13,36 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: UsersComponent,
-    data: { pageTitle: 'User Management List' }
+    component: LayoutComponent,
+    data: { pageTitle: 'User Management List' },
+    children: [
+      {
+        path: '',
+        component: UsersComponent
+      }
+    ]
   },
   {
     path: 'edit-user',
-    component: UserEditComponent,
-    data: { pageTitle: 'Edit User' }
+    component: LayoutComponent,
+    data: { pageTitle: 'Edit User' },
+    children: [
+      {
+        path: '',
+        component: UserEditComponent
+      }
+    ]
   },
   {
     path: 'add-user',
-    component: UserEditComponent,
-    data: { pageTitle: 'Add User' }
+    component: LayoutComponent,
+    data: { pageTitle: 'Add User' },
+    children: [
+      {
+        path: '',
+        component: UserEditComponent
+      }
+    ]
   },
   {
     path: "**",

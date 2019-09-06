@@ -13,6 +13,7 @@ import { HeaderComponent } from './feature/header/header.component';
 import { ShareModule } from './feature/share/share.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { ActionByUserListComponent } from './feature/users/action-by-user-list/action-by-user-list.component';
+import { LayoutComponent } from './feature/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ActionByUserListComponent } from './feature/users/action-by-user-list/a
     UsersComponent,
     UserEditComponent,
     HeaderComponent,
-    ActionByUserListComponent
+    ActionByUserListComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
