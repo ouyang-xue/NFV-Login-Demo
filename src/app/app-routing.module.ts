@@ -5,6 +5,7 @@ import { LoginComponent } from './feature/login/login.component';
 import { UsersComponent } from './feature/users/users.component';
 import { UserEditComponent } from './feature/user-edit/user-edit.component';
 import { LayoutComponent } from './feature/layout/layout.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     path: 'users',
     component: LayoutComponent,
     data: { pageTitle: 'User Management List' },
+    canActivate: [ AuthGuard ],
     children: [
       {
         path: '',
@@ -26,6 +28,7 @@ const routes: Routes = [
     path: 'edit-user',
     component: LayoutComponent,
     data: { pageTitle: 'Edit User' },
+    canActivate: [ AuthGuard ],
     children: [
       {
         path: '',
@@ -37,6 +40,7 @@ const routes: Routes = [
     path: 'add-user',
     component: LayoutComponent,
     data: { pageTitle: 'Add User' },
+    canActivate: [ AuthGuard ],
     children: [
       {
         path: '',
@@ -52,6 +56,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ AuthGuard ]
 })
 export class AppRoutingModule { }
