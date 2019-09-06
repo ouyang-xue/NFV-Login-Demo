@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   psdMinLen: number = 4;
   psdMaxLen: number = 18;
 
+  displayErrMsg: boolean = false;
+
   loginFormData = {
     username: '',
     password: ''
@@ -41,12 +43,6 @@ export class LoginComponent implements OnInit {
     this.cloneFormData.password = Md5.hashStr(this.loginFormData.password).toString();
 
     this.http.post('http://localhost:3000/users', this.cloneFormData).toPromise().then((data:any) => {
-        
-        if(data.token == null ){
-          window.alert("Error username or password!");
-          return;
-        }
-        
         window.localStorage.setItem('auth_token', data.token);
         window.localStorage.setItem('id', data.id);
         this.router.navigate(['/users']);
