@@ -11,6 +11,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown'; 
 import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   imports: [],
@@ -25,7 +26,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     FormsModule,
     DropdownModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TooltipModule
   ],
   providers: [
   ]

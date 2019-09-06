@@ -7,21 +7,29 @@ $blur: 80px;
 header {
     margin: 0;
     padding: 0.5em 0.5em;
-    height: 2em;
+    height: 1.7em;
     // box-shadow:0px -4px 10px #333333;
 }
 
-.item {
-    color: #fff;
-    font-size: 0.5em;
-}
-
 .left {
+    margin: 0;
+    padding: 0;
     height: 100%;
 }
 
 .right {
+    margin: 0;
+    padding: 0;
     float: right;
+}
+
+li {
+    font-size: 1em;
+    margin-right: .5em;
+}
+
+li:hover {
+    color: rgb(0, 204, 255);
 }
 
 .content {
@@ -55,6 +63,12 @@ header {
     background-position: center top;
     background-size: cover;
     background-attachment: fixed;
+}
+
+.tooltip {
+    color: yellow;
+    background-color: red;
+    font-size: 5em;
 }
 
 
