@@ -9,8 +9,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(user: User): Observable<User> {
-    return this.http.post<User>("http://localhost:3000/login", user)
+  login(user: User): Observable<LoginInfo> {
+    return this.http.post<LoginInfo>("http://localhost:3000/login", user)
   }
 
   logout() {
