@@ -2,14 +2,14 @@ import { Component, OnInit } from "@angular/core";
 import { AgGridAngular } from "ag-grid-angular";
 import { HttpClient } from "@angular/common/http";
 import { ActionByUserListComponent } from "./action-by-user-list/action-by-user-list.component";
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 @Component({
   selector: "app-users",
   templateUrl: "./users.component.html",
   styleUrls: ["./users.component.scss"]
 })
 export class UsersComponent implements OnInit {
-  public title: any = "User Management List";
+  public title: any = "";
 
   private gridApi;//table的api onGridReady方法设置
   private gridColumnApi;
@@ -96,15 +96,18 @@ export class UsersComponent implements OnInit {
   //   this.gridApi.refreshCells({ columns: ["currency"] });
   // }
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.context = { componentParent: this };
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private activeRoute: ActivatedRoute) {
+      this.context = { componentParent: this };
   }
 
   ngOnInit() {
-
+    this.activeRoute.data.subscribe(res => this.title = res.pageTitle);
   }
   public addItem() {
-    this.router.navigate(["/edit-user"]);
+    this.router.navigate(["/add-user"]);
   }
   // 直接通过html设置cellRendderer
   // createShowCellRenderer() {

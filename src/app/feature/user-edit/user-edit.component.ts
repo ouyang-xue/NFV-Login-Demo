@@ -31,7 +31,7 @@ export class UserEditComponent implements OnInit {
     }
   }
 
-  public title: any = "Add User";
+  public title: any = "User";
 
   cars: SelectItem[];
 
@@ -50,12 +50,14 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activeRoute.data.subscribe(res => this.title = res.pageTitle);
+
     this.activeRoute.queryParams.subscribe((params: Params) => {
       this.id = params['id'];
     });
   
     if(this.id!=null){
-      this.title = "Edit User";
+      // this.title = "Edit User";
       this.btnDisplay = 1;
       this.http.get("http://localhost:3000/users?id="+this.id ).toPromise().then((data: any) => {
           this.users = data;

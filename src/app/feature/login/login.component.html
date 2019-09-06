@@ -1,9 +1,10 @@
 
 <div class="container">
-    <h1 class="welcome">Welcome to users management</h1>
+    <!-- <h1 class="welcome">Welcome to users management</h1> -->
+    <div class="welcome"><span>Welcome to users management</span></div>
     <div class="content">
         <form #loginForm="ngForm" class="login-form" (submit)="loginData()">
-            <h3>Login</h3>
+            <h3 class="login-title">Login</h3>
             <div class="login-info">
                 <span>
                     <input type="text" class="username" name="username" pInputText placeholder="Username"

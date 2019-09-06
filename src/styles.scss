@@ -13,17 +13,17 @@ html, body {
 
 body {
     background: url($background) no-repeat fixed;
-    background-size: 100%;
+    background-size: 100% 100%;
 }
 
-.userheader {
-    position:fixed; 
-    margin-top: 0; 
-    top: 0;
-    width:100%; 
-    z-index:9999;
-}
+// .userheader {
+//     position:fixed; 
+//     margin-top: 0; 
+//     top: 0;
+//     width:100%; 
+//     z-index:9999;
+// }
 
-.headerBlank {
-    margin-top: 6em;
-}
+// .headerBlank {
+//     margin-top: 6em;
+// }

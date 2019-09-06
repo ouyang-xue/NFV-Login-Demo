@@ -1,8 +1,8 @@
-<app-header class="userheader" [title]="title"></app-header>
+<app-header [title]="title"></app-header>
 
 <ag-grid-angular
   #agGrid
-  class="ag-theme-balham headerBlank"
+  class="ag-theme-balham"
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   (gridReady)="onGridReady($event)"

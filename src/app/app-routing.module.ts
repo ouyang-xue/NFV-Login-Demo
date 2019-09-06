@@ -12,15 +12,22 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    component: UsersComponent
+    component: UsersComponent,
+    data: { pageTitle: 'User Management List' }
   },
   {
     path: 'edit-user',
-    component: UserEditComponent
+    component: UserEditComponent,
+    data: { pageTitle: 'Edit User' }
+  },
+  {
+    path: 'add-user',
+    component: UserEditComponent,
+    data: { pageTitle: 'Add User' }
   },
   {
     path: "**",
-    redirectTo: "login"
+    redirectTo: "users"
   }
 ];
 
