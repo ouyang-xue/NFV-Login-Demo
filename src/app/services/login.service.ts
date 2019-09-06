@@ -10,7 +10,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(user: User): Observable<LoginInfo> {
-    return this.http.post<LoginInfo>("http://localhost:3000/login", user)
+    return this.http.post<LoginInfo>("/login/", user)
   }
 
   logout() {
