@@ -11,7 +11,7 @@ import {Md5} from 'ts-md5';
 })
 
 export class UserEditComponent implements OnInit {
-  private labelBtn: string = "Add"
+  public labelBtn: string = "Add"
   public psdMinLen: number = 4;
   public psdMaxLen: number = 16;
   public btnDisplay: number = 0;
