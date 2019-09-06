@@ -1,52 +1,83 @@
 
+@import "../../../variables";
 
-.content-section{
-    margin: 0;
-    padding: 0
+$blur: 150px;
+$compWidth: 350px;
+$marginSizeLR: 100px;
+
+.content {
+    padding: 0;
+    margin: 1em auto;
+    width: 50em;
+    height: 30em;
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    background-position: center top;
+    background-size: cover;
+    z-index: 1;
+    box-shadow: 0 0 0 1px hsla(240,0%,100%,.3) inset,
+    .1em .3em 1em rgba(7, 0, 100, 0.6);
+    overflow: hidden;
+    text-align: center;
+}
+.content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-filter: blur($blur);
+    -moz-filter: blur($blur);
+    -ms-filter: blur($blur);
+    -o-filter: blur($blur);
+    filter: blur($blur);
+    z-index: -3;
+    margin: -30px;
+    background-image: url($background);
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-.full-name{
-    margin-left: 20% ;
-    padding-left : 200px;
-    padding-top: 100px; 
-    width: 900px
+.box {
+    width: $compWidth + $marginSizeLR * 2;
+    margin: 0 auto;
+    text-align: left;
 }
 
-.user-name{
-    margin-left: 20% ;
-    padding-left : 196px; 
-    width: 900px
+.full-name, .user-name, .roleSelect {
+    margin: 1em 0px;
 }
 
-.password{
-    margin-left: 20% ;
-    padding-left : 200px; 
-    width: 900px
+.color1 {
+    background-color: red;
 }
 
-.roleSelect{
-    margin-left: 21% ;
-    padding-left : 200px; 
-
-}
-.roleSelect p-dropdown {
-    padding-left : 15px; 
-    width: 900px
+.color2 {
+    background-color: blue;
 }
 
-.submitBtn{
-    margin-left: 30% ;
-    margin-top: 4rem;
-    padding-left : 200px; 
+.label {
+    margin: 0 $marginSizeLR;
+    color: white;
+    font-size: 1.2em;
 }
 
-font{
-    color: white; 
-    size: 16px;
-    font-weight:bold;
-    padding-right: 200px;
-    padding-top: 5px;
+.dropdown-w {
+    height: 33px;
 }
+
+.component-group {
+    width: $compWidth;
+    margin: 0 $marginSizeLR;
+}
+
+.component {
+    width: $compWidth;
+}
+
 .password font{
     color: white; 
     size: 14px;
@@ -55,10 +86,17 @@ font{
 }
 
 .err {
-    padding-left : 39%; 
+    text-align: center;
 }
 
 .errMsg{
-    color: rgb(238, 230, 230);
+    font-size: 12px;
+    color: white;
+}
+
+.submitBtn {
+    width: $compWidth;
+    color: white;
+    background-color: rgb(25, 0, 138);
 }
 
