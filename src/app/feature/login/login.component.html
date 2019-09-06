@@ -53,3 +53,13 @@
 
 </div>
 
+<p-dialog header="Warning" [(visible)]="displayErrMsg" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
+        [maximizable]="true" [baseZIndex]="10000">
+    <p>
+        Username or Password error!
+    </p>
+        <p-footer>
+            <p-button class="warning-msg-btn" (click)="displayErrMsg=false" label="Ok"></p-button>
+        </p-footer>
+</p-dialog>
+
