@@ -47,7 +47,7 @@
                 <div class="err">
                     <span  *ngIf="username.invalid && (username.dirty || username.touched)"   class="errMsg">
                         <span *ngIf="username.errors.required">
-                            User name is required.
+                            Username is required.
                         </span>
                         <span *ngIf="username.errors.minlength">
                             User name must be at least {{ psdMinLen }} characters long.
