@@ -10,8 +10,7 @@ import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown'; 
 import {DialogModule} from 'primeng/dialog';
-
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   imports: [],
@@ -25,7 +24,8 @@ import {DialogModule} from 'primeng/dialog';
     InputTextModule,
     FormsModule,
     DropdownModule,
-    DialogModule
+    DialogModule,
+    ConfirmDialogModule
   ],
   providers: [
   ]

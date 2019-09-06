@@ -1,4 +1,3 @@
-
 <ag-grid-angular
   #agGrid
   class="ag-theme-balham"
@@ -7,6 +6,9 @@
   (gridReady)="onGridReady($event)"
   [context]="context"
   [frameworkComponents]="frameworkComponents"
+  [defaultColDef]="defaultColDef"
 >
 </ag-grid-angular>
 <a class="fa fa-plus-circle fa-3x addBtn" (click)="addItem()"></a>
+<p-confirmDialog [style]="{width: '35vw'}"></p-confirmDialog>
+<app-view-user  [display]="isView" (childEvent) = "getChildEvent()"></app-view-user>
