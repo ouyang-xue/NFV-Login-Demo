@@ -11,7 +11,7 @@ import {Md5} from 'ts-md5';
 })
 
 export class UserEditComponent implements OnInit {
-
+  private labelBtn: string = "Add"
   public psdMinLen: number = 4;
   public psdMaxLen: number = 16;
   public btnDisplay: number = 0;
@@ -57,7 +57,8 @@ export class UserEditComponent implements OnInit {
     });
   
     if(this.id!=null){
-      // this.title = "Edit User";
+      this.title = "Edit User";
+      this.labelBtn = "Edit";
       this.btnDisplay = 1;
       this.http.get("http://localhost:3000/users?id="+this.id ).toPromise().then((data: any) => {
           this.users = data;
