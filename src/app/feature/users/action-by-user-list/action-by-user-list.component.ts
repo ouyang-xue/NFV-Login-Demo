@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from "ag-grid-angular";
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router'
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-action-by-user-list',
   templateUrl: './action-by-user-list.component.html',
@@ -9,7 +10,10 @@ import { Router } from '@angular/router'
 })
 export class ActionByUserListComponent implements ICellRendererAngularComp {
 
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private userService: UserService) { 
   }
   public params: any;
   agInit(params: any): void {
@@ -23,12 +27,8 @@ export class ActionByUserListComponent implements ICellRendererAngularComp {
   }
 
   del() {
-    this.http
-      .delete('http://localhost:3000/users/' + this.params.value)
-      .subscribe(data => {
-        this.params.context.componentParent.queryDatas();
-      });
-
+    this.userService.deleteUser(this.params.value).subscribe(data => 
+      this.params.context.componentParent.queryDatas());
   }
 }
 

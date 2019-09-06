@@ -3,6 +3,7 @@ import { AgGridAngular } from "ag-grid-angular";
 import { HttpClient } from "@angular/common/http";
 import { ActionByUserListComponent } from "./action-by-user-list/action-by-user-list.component";
 import { Router, ActivatedRoute } from '@angular/router'
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: "app-users",
   templateUrl: "./users.component.html",
@@ -65,6 +66,14 @@ export class UsersComponent implements OnInit {
     actionCellRenderer: ActionByUserListComponent,
   };
 
+  constructor(
+    private http: HttpClient, 
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private userService: UserService) {
+      this.context = { componentParent: this };
+  }
+
   rowData: any;
   //通过table的属性设置   设置table的api到gridapi中 （refreshEvenRowsCurrencyData 中就是一个使用的例子）
   onGridReady(params) {
@@ -77,11 +86,7 @@ export class UsersComponent implements OnInit {
   }
 
   queryDatas() {
-    this.http
-      .get("http://localhost:3000/users")
-      .subscribe(data => {
-        this.rowData = data;
-      });
+    this.userService.getUsers().subscribe(serverUsers => this.rowData = serverUsers);
   }
 
   // refreshEvenRowsCurrencyData() {
@@ -95,13 +100,6 @@ export class UsersComponent implements OnInit {
   //   //刷新指定的列
   //   this.gridApi.refreshCells({ columns: ["currency"] });
   // }
-
-  constructor(
-    private http: HttpClient, 
-    private router: Router,
-    private activeRoute: ActivatedRoute) {
-      this.context = { componentParent: this };
-  }
 
   ngOnInit() {
     this.activeRoute.data.subscribe(res => this.title = res.pageTitle);
