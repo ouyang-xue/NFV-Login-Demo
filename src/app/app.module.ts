@@ -15,6 +15,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ActionByUserListComponent } from './feature/users/action-by-user-list/action-by-user-list.component';
 import { LayoutComponent } from './feature/layout/layout.component';
 import { GlobalInterceptor } from './services/global.interceptor';
+import { ViewUserComponent } from './feature/users/view-user/view-user.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { GlobalInterceptor } from './services/global.interceptor';
     UserEditComponent,
     HeaderComponent,
     ActionByUserListComponent,
-    LayoutComponent
+    LayoutComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,

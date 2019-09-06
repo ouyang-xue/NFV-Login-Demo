@@ -1,38 +1,42 @@
 import { Component, OnInit } from "@angular/core";
-import { AgGridAngular } from "ag-grid-angular";
+// import { AgGridAngular } from "ag-grid-angular";
 import { HttpClient } from "@angular/common/http";
 import { ActionByUserListComponent } from "./action-by-user-list/action-by-user-list.component";
 import { Router, ActivatedRoute } from '@angular/router'
 import { UserService } from 'src/app/services/user.service';
+import { ConfirmationService, Message } from 'primeng/api';
 @Component({
   selector: "app-users",
   templateUrl: "./users.component.html",
-  styleUrls: ["./users.component.scss"]
+  styleUrls: ["./users.component.scss"],
+  providers: [ConfirmationService]
 })
 export class UsersComponent implements OnInit {
   public title: any = "";
+  public isView: any = false;
 
   private gridApi;//table的api onGridReady方法设置
   private gridColumnApi;
 
   public context;
 
+  msgs: Message[] = [];
+
   columnDefs = [
     {
       headerName: "User Name",
       field: "username",
-      sortable: true,
-      filter: true,
+      width: 150
     },
     {
       headerName: "Full Name",
       field: "fullname",
-      sortable: true,
-      filter: true
+      width: 250
     },
     {
       headerName: "Role",
       field: "role",
+      width: 80,
       valueGetter: function (params) {
         var country = params.data.role;
         console.log("country", country);
@@ -44,14 +48,12 @@ export class UsersComponent implements OnInit {
           return "Other";
         }
       },
-
-      sortable: true,
-      filter: true
     },
     {
       // 属性是可以重复设置到多个列的
       headerName: "...",
       field: "id",
+      width: 80,
       sortable: false,
       filter: false,
       // 通过方法设置render
@@ -60,6 +62,12 @@ export class UsersComponent implements OnInit {
     }
   ];
 
+ public defaultColDef = {
+    sortable: true,
+    filter: true,
+    resizable: true,
+  };
+
   //render使用自定义组件需要定义一个frameworkComponents（table的html中要设置）
   //然后和上面columnDefs里面的引用绑定指向你要的组件
   frameworkComponents = {
@@ -67,11 +75,12 @@ export class UsersComponent implements OnInit {
   };
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private userService: UserService) {
-      this.context = { componentParent: this };
+    private userService: UserService,
+    private confirmationService: ConfirmationService) {
+    this.context = { componentParent: this };
   }
 
   rowData: any;
@@ -80,7 +89,7 @@ export class UsersComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
 
-    // params.api.sizeColumnsToFit();
+    params.api.sizeColumnsToFit();
 
     this.queryDatas();
   }
@@ -107,6 +116,30 @@ export class UsersComponent implements OnInit {
   public addItem() {
     this.router.navigate(["/add-user"]);
   }
+
+  public editItem(id: any) {
+    this.router.navigateByUrl("/edit-user?id=" + id);
+  }
+
+  public delItem(params: any) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + params.data.username + '?',
+      header: 'Delete User',
+      accept: () => {
+        this.userService.deleteUser(params.value).subscribe(() => this.queryDatas());
+      }
+    });
+  }
+
+  public viewItem(params: any) {
+    this.isView = true;
+  }
+
+  getChildEvent(){
+    console.log("111111111111111111111");
+    this.isView = false;
+  }
+
   // 直接通过html设置cellRendderer
   // createShowCellRenderer() {
   //   function ShowCellRenderer() {}
