@@ -9,6 +9,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown'; 
+import {DialogModule} from 'primeng/dialog';
+
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import {DropdownModule} from 'primeng/dropdown';
     PasswordModule,
     InputTextModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    DialogModule
   ],
   providers: [
   ]
