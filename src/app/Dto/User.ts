@@ -1,5 +1,5 @@
 class User {
-    id: number;
+    _id: number;
     username: string;
     fullname: string;
     pwd: string;

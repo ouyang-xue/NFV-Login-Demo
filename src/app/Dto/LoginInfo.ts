@@ -1,4 +1,4 @@
 class LoginInfo {
-    token: Token;
+    token: string;
     user: User;
 }
