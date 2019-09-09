@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {Md5} from 'ts-md5';
-import { Password } from 'primeng/password';
-
+import { LoginService } from 'src/app/services/login.service';
+import {Message} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-login',
@@ -16,21 +16,28 @@ export class LoginComponent implements OnInit {
   psdMinLen: number = 4;
   psdMaxLen: number = 18;
 
-  displayErrMsg: boolean = false;
+  warningMsg: Message[] = [];
 
-  loginFormData = {
+  loginFormData: User = {
+    id: 0,
     username: '',
-    password: ''
+    fullname: '',
+    pwd: '',
+    role: 0
   }
 
-  cloneFormData = {
+  cloneFormData: User = {
+    id: 0,
     username: '',
-    password: ''
+    fullname: '',
+    pwd: '',
+    role: 0
   }
   
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private service: LoginService
     ) { }
 
   ngOnInit() {
@@ -40,15 +47,21 @@ export class LoginComponent implements OnInit {
   loginData() {
 
     this.cloneFormData.username = this.loginFormData.username;
-    this.cloneFormData.password = Md5.hashStr(this.loginFormData.password).toString();
+    this.cloneFormData.pwd = Md5.hashStr(this.loginFormData.pwd).toString();
 
-    this.http.post('http://localhost:3000/users', this.cloneFormData).toPromise().then((data:any) => {
-        window.localStorage.setItem('auth_token', data.token);
-        window.localStorage.setItem('id', data.id);
+    this.service.login(this.cloneFormData).subscribe((loginInfoService: LoginInfo) => {
+
+        // console.log("loginInfoService==="+loginInfoService);
+        // if(loginInfoService.token == null){
+        //   this.warningMsg = [];
+        //   this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:'Username or Password error!'});
+        //   return;
+        // }
+
+        // window.localStorage.setItem('auth_token', loginInfoService.token.token);
+        // window.localStorage.setItem('id', loginInfoService.user.id.toString());
         this.router.navigate(['/users']);
+    });
 
-      }).catch(err  => {
-        window.alert(err);
-    })
   }
 }
