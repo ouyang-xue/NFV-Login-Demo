@@ -1,6 +1,5 @@
 
 <div class="container">
-    <!-- <h1 class="welcome">Welcome to users management</h1> -->
     <div class="welcome"><span>Welcome to users management</span></div>
     <div class="content">
         <form #loginForm="ngForm" class="login-form" (submit)="loginData()">
@@ -24,7 +23,7 @@
             <div class="login-info">
                 <div>
                     <input type="password" class="password" name="password" pInputText placeholder="Password"
-                        [(ngModel)]="loginFormData.password" required minlength="{{ psdMinLen }}"
+                        [(ngModel)]="loginFormData.pwd" required minlength="{{ psdMinLen }}"
                         maxlength="{{ psdMaxLen }}" #pwd="ngModel" />
     
                     <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)" class="errMsg">
@@ -47,19 +46,11 @@
             </div>
     
             <button pButton class="loginBtn" type="submit" label="Login" [disabled]="!loginForm.form.valid"></button>
-    
+
         </form>
+        <div class="warningMsg">
+            <p-messages [(value)]="warningMsg"></p-messages>
+        </div>
+        
     </div>
-
 </div>
-
-<p-dialog header="Warning" [(visible)]="displayErrMsg" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
-        [maximizable]="true" [baseZIndex]="10000">
-    <p>
-        Username or Password error!
-    </p>
-        <p-footer>
-            <p-button class="warning-msg-btn" (click)="displayErrMsg=false" label="Ok"></p-button>
-        </p-footer>
-</p-dialog>
-

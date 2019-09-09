@@ -15,7 +15,7 @@ export class LoginService {
     private router: Router) { }
 
   login(user: User): Observable<LoginInfo> {
-    return this.http.post<LoginInfo>("/login/", user)
+    return this.http.post<LoginInfo>("/users/", user)
   }
 
   logout() {

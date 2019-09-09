@@ -13,6 +13,9 @@ import {DialogModule} from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TooltipModule} from 'primeng/tooltip';
 
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
 @NgModule({
   imports: [],
   declarations: [],
@@ -27,7 +30,9 @@ import {TooltipModule} from 'primeng/tooltip';
     DropdownModule,
     DialogModule,
     ConfirmDialogModule,
-    TooltipModule
+    TooltipModule,
+    MessagesModule,
+    MessageModule
   ],
   providers: [
   ]
