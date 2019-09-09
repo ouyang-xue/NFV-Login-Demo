@@ -3,6 +3,7 @@ import { SelectItem } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import { Router ,Params ,ActivatedRoute} from '@angular/router'
 import {Md5} from 'ts-md5'; 
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -16,82 +17,62 @@ export class UserEditComponent implements OnInit {
   public psdMaxLen: number = 16;
   public btnDisplay: number = 0;
   private id:number = 0;
+  private title:string = "add";
   users: any[] = [];
-
-  user = {
+  role: SelectItem[];
+  user: User = {
     id: 0,
     fullname: '',
     username: '',
-    pwassword: '',
-    role: 0,
-    token: {
-      id: 0,
-      token: "abcdefg-2b13-4b73-b743-aaabbbccceeee",
-      expiryDate: 1422955762006
-    }
+    pwd: '',
+    role: 0
   }
-
-  public title: any = "User";
-
-  cars: SelectItem[];
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private activeRoute: ActivatedRoute
-    ) {
-    
-    this.cars = [
-      { label: 'Admin', value: '0' },
-      { label: 'Bussiness', value: '1' },
-      { label: 'User', value: '2' }
-    ];
-
+    private activeRoute: ActivatedRoute,
+    private userService: UserService) {
+      this.role = [
+        { label: 'Admin', value: '0' },
+        { label: 'Bussiness', value: '1' },
+        { label: 'User', value: '2' }
+      ];
   }
-
+  
   ngOnInit() {
     this.activeRoute.data.subscribe(res => this.title = res.pageTitle);
-
-    this.activeRoute.queryParams.subscribe((params: Params) => {
-      this.id = params['id'];
-    });
-  
-    if(this.id!=null){
-      this.title = "Edit User";
-      this.labelBtn = "Edit";
-      this.btnDisplay = 1;
-      this.http.get("http://localhost:3000/users?id="+this.id ).toPromise().then((data: any) => {
-          this.users = data;
-          this.user = data[0];
-          console.log("users",this.user);
-        }).catch(err => {
-          console.log(err);
-        }); 
+    if('Edit User'===this.title){
+      this.activeRoute.queryParams.subscribe((params: Params) => {
+        this.id = params['id'];
+      });
+      if(this.id!=null){
+        this.labelBtn = "Edit";
+        this.btnDisplay = 1;
+        this.userService.getUserById(this.id).subscribe(userdata => this.user = userdata[0]);
+      }else{
+        this.router.navigate(["/users"]);
+      }
     }
   }
 
   submit() {
     if (this.user.id == 0) {
-      this.http.get("http://localhost:3000/users").toPromise().then((data: any) => {
-        this.users = data;
-        const id = data[data.length - 1].id + 1;
+      this.userService.getUsers().subscribe(serverUsers =>{
+        this.users = serverUsers
+        const id = this.users[this.users.length - 1].id + 1;
         this.user.id = id;
-        this.user.token.id = id;
-        this.user.pwassword = Md5.hashStr(this.user.pwassword).toString();
-        this.http.post("http://localhost:3000/users", this.user).toPromise().then((data: any) => {
-          this.router.navigate(["/users"])
-        }).catch(err => {
-          console.log(err);
-        })
-      }).catch(err => {
-        console.log(err);
+        this.user.pwd = Md5.hashStr(this.user.pwd).toString();
+        this.userService.addUser(this.user).subscribe(userData => {
+          this.user = userData;
+          this.router.navigate(["/users"]);
+        });
       });
     } else {
-      this.http.patch(`http://localhost:3000/users/${this.user.id}`, this.user).toPromise().then((data: any) => {
-        this.router.navigate(["/users"])
-      }).catch(err => {
-        console.log(err);
-      })
+      this.userService.editUser(this.user).subscribe(userData => {
+        this.user = userData;
+        this.router.navigate(["/users"]);
+      });
     }
   }
 }

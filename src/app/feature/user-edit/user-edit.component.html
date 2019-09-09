@@ -5,7 +5,7 @@
                 <span class="label">Full name</span>
                 <div class="ui-inputgroup component-group">
                     <span class="ui-inputgroup-addon"><i class="fa fa-coffee"></i></span>
-                    <input name="fullName" 
+                    <input name="Fullname" 
                         class="component"
                         [(ngModel)]="user.fullname" 
                         required type="text" 
@@ -65,7 +65,7 @@
                     <input #pwd="ngModel" 
                         name="password" 
                         class="component"
-                        [(ngModel)]="user.pwassword" 
+                        [(ngModel)]="user.pwd" 
                         required type="password" pPassword
                         placeholder="Password" 
                         minlength={{psdMinLen}} 
@@ -89,7 +89,7 @@
                 <span class="label">Role</span>
                 <div class="ui-inputgroup component-group">
                     <span class="ui-inputgroup-addon dropdown-w"><i class="fa fa-bars"></i></span>
-                    <p-dropdown [options]="cars" name="roleSelect" class="component" [(ngModel)]="user.role"></p-dropdown>
+                    <p-dropdown [options]="role" name="roleSelect" class="component" [(ngModel)]="user.role"></p-dropdown>
                 </div>
             </div>
     
