@@ -7,7 +7,7 @@ import {ValidationPipe} from 'src/common/pipe/ValidationPipe'
 export class AppController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('s-login')
+  @Post('s_login')
   @UsePipes(new ValidationPipe())
   async login(@Request() req,@Body() loginDto:LoginDto) {
     // console.log(loginDto)

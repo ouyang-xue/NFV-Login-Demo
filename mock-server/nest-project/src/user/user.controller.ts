@@ -5,7 +5,7 @@ import {User} from './interfaces/User.Interface'
 import {AuthGuard} from '@nestjs/passport'
 import {ValidationPipe} from 'src/common/pipe/ValidationPipe'
 
-@Controller('s-users')
+@Controller('s_users')
 @UseGuards(AuthGuard('jwt'))
 export class UserController {
     constructor(private readonly userService:UserService){}

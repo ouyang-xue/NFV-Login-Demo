@@ -14,13 +14,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
       response
         .status(status)
         .json({
-          data: {
-            error: exception.getErrorMessage(),
-          }, // 获取全部的错误信息
-          message: '请求失败',
-          statusCode: exception.getErrorCode(),
-          date: new Date().toLocaleDateString(),
-          path: request.url,
+          // data: {
+          //   error: exception.getErrorMessage(),
+          // }, // 获取全部的错误信息
+          // message: '请求失败',
+          // statusCode: exception.getErrorCode(),
+          // date: new Date().toLocaleDateString(),
+          // path: request.url,
+          error:exception.getErrorMessage(),
         })
 
     } else {
@@ -28,13 +29,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
       response
         .status(status)
         .json({
-          data: {
-            error: message,
-          }, // 获取全部的错误信息
-          message: '请求失败',
-          statusCode: status,
-          date: new Date().toLocaleDateString(),
-          path: request.url,
+          // data: {
+          //   error: message,
+          // }, // 获取全部的错误信息
+          // message: '请求失败',
+          // statusCode: status,
+          // date: new Date().toLocaleDateString(),
+          // path: request.url,
+          error: message
         })
     }
   }

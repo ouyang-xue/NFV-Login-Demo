@@ -13,13 +13,13 @@ export class AuthService {
   async signIn(loginDto:LoginDto) {
     // In the real-world app you shouldn't expose this method publicly
     // instead, return a token once you verify user credentials
-
+    console.log(loginDto)
     const user = await this.usersService.findOne(loginDto);
     // console.log(user);
     if(user){
-      const uload:JwtPayload = {name:user.name};
+      const uload:JwtPayload = {username:user.username};
       return {
-        Authorization: this.jwtService.sign(uload),
+        token: this.jwtService.sign(uload),
         user:user
       }
     }else{
@@ -28,6 +28,6 @@ export class AuthService {
   }
 
   async validateUser(payload: JwtPayload): Promise<any> {
-    return await this.usersService.findOneByName(payload.name);
+    return await this.usersService.findOneByName(payload.username);
   }
 }
