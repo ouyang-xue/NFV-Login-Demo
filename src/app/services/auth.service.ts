@@ -5,13 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
+  TOKEN: string = "auth_token";
+
   constructor() { }
 
   getAuthorizationToken(): string {
-    return window.localStorage.getItem("auth_token");
+    return window.localStorage.getItem(this.TOKEN);
+  }
+
+  setAuthorizationToken(token: string) {
+    window.localStorage.setItem(this.TOKEN, `Bearer ${token}`);
   }
 
   removeAuthorizationToken(): void {
-    window.localStorage.removeItem("auth_token");
+    window.localStorage.removeItem(this.TOKEN);
   }
 }
