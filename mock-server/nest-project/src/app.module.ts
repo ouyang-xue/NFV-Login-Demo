@@ -11,18 +11,18 @@ import {TransformInterceptor} from 'src/common/filters/transform.interceptor'
   imports: [AuthModule,UserModule],
   controllers: [AppController],
   providers: [AppService,
-    {
-      provide: APP_PIPE,
-      useClass: ValidationPipe,
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TransformInterceptor,
-    },
-    {
-      provide:APP_PIPE,
-      useClass:ValidateIDPipe      
-    }
+    // {
+    //   provide: APP_PIPE,
+    //   useClass: ValidationPipe,
+    // },
+    // {
+    //   provide: APP_INTERCEPTOR,
+    //   useClass: TransformInterceptor,
+    // },
+    // {
+    //   provide:APP_PIPE,
+    //   useClass:ValidateIDPipe      
+    // }
   ],
   
 })

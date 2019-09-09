@@ -11,7 +11,7 @@ export class UserService {
     constructor(@Inject('USERS_MODEL') private readonly userModel:Model<User>){}
 
     async create(userDto: UsersDto): Promise<string> {
-        const u = await this.userModel.findOne({"name":userDto.name});
+        const u = await this.userModel.findOne({"username":userDto.username});
         if(u){
           throw new ApiException('用户已存在',ApiErrorCode.USER_ID_HAS_EXSIT,HttpStatus.BAD_REQUEST)
         }
@@ -24,19 +24,20 @@ export class UserService {
       }
 
       async findOne(loginDTO : LoginDto) :Promise<User>{
-        const u = this.userModel.findOne({"name":loginDTO.name});
-        if(!u){
-          throw new ApiException('用户不存在',ApiErrorCode.LONGIN_FAIL,HttpStatus.BAD_REQUEST)
-        }
-        const user = await this.userModel.findOne({"name":loginDTO.name,"password":loginDTO.password});
+        // const u = this.userModel.findOne({"username":loginDTO.username});
+        // if(!u){
+        //   throw new ApiException('用户不存在',ApiErrorCode.LONGIN_FAIL,HttpStatus.BAD_REQUEST)
+        // }
+        const user = await this.userModel.findOne({"username":loginDTO.username,"pwd":loginDTO.pwd});
+        // console.log(user);
         if(!user){
-          throw new ApiException('密码错误',ApiErrorCode.LONGIN_FAIL,HttpStatus.BAD_REQUEST)
+          throw new ApiException('用户名或密码错误',ApiErrorCode.LONGIN_FAIL,HttpStatus.BAD_REQUEST)
         }
         return user;
       }
 
       async findOneByName(name : string) :Promise<User>{
-        return await this.userModel.findOne({"name":name});
+        return await this.userModel.findOne({"username":name});
       }
   
       async findOneByID(id:string) {
@@ -49,7 +50,7 @@ export class UserService {
 
       
       async edit(id:string,userDto: UsersDto){
-        const u = await this.findOneByName(userDto.name);
+        const u = await this.findOneByName(userDto.username);
         if(u){
           throw new ApiException('用户名已存在',ApiErrorCode.USER_ID_HAS_EXSIT,HttpStatus.BAD_REQUEST)
         }
