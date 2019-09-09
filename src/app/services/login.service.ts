@@ -9,17 +9,26 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
 
+  _ID: string = "id";
+  ROLE: string = "role";
+
+
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private router: Router) { }
 
-  login(user: User): Observable<LoginInfo> {
-    return this.http.post<LoginInfo>("/users/", user)
+  login(user: User): Observable<any> {
+    return this.http.post<User>("/s_login/", user)
   }
 
   logout() {
     this.authService.removeAuthorizationToken();
     this.router.navigate(["login"]);
+  }
+
+  saveLoginInfo(id: string, role: string) {
+    window.localStorage.setItem(this._ID, `Bearer ${id}`);
+    window.localStorage.setItem(this.ROLE, `Bearer ${role}`);
   }
 }

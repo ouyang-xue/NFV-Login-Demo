@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {Md5} from 'ts-md5';
 import { LoginService } from 'src/app/services/login.service';
 import {Message} from 'primeng/components/common/api';
+import { AuthService } from 'src/app/services/auth.service';
+import { error } from 'util';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
   warningMsg: Message[] = [];
 
   loginFormData: User = {
-    id: 0,
+    _id: 0,
     username: '',
     fullname: '',
     pwd: '',
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   cloneFormData: User = {
-    id: 0,
+    _id: 0,
     username: '',
     fullname: '',
     pwd: '',
@@ -37,7 +39,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private service: LoginService
+    private service: LoginService,
+    private authService: AuthService
     ) { }
 
   ngOnInit() {
@@ -49,18 +52,15 @@ export class LoginComponent implements OnInit {
     this.cloneFormData.username = this.loginFormData.username;
     this.cloneFormData.pwd = Md5.hashStr(this.loginFormData.pwd).toString();
 
-    this.service.login(this.cloneFormData).subscribe((loginInfoService: LoginInfo) => {
+    this.service.login(this.cloneFormData).subscribe((loginData: any) => {
 
-        // console.log("loginInfoService==="+loginInfoService);
-        // if(loginInfoService.token == null){
-        //   this.warningMsg = [];
-        //   this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:'Username or Password error!'});
-        //   return;
-        // }
-
-        // window.localStorage.setItem('auth_token', loginInfoService.token.token);
-        // window.localStorage.setItem('id', loginInfoService.user.id.toString());
+        this.authService.setAuthorizationToken(loginData.token);
+        this.service.saveLoginInfo(loginData.user._id.toString(), loginData.user.role);
         this.router.navigate(['/users']);
+
+    }, (error: any) => {
+      this.warningMsg = [];
+      this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:error.error.error});
     });
 
   }
