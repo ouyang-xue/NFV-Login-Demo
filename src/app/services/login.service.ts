@@ -28,7 +28,7 @@ export class LoginService {
   }
 
   saveLoginInfo(id: string, role: string) {
-    window.localStorage.setItem(this._ID, `Bearer ${id}`);
-    window.localStorage.setItem(this.ROLE, `Bearer ${role}`);
+    window.localStorage.setItem(this._ID, `${id}`);
+    window.localStorage.setItem(this.ROLE, `${role}`);
   }
 }

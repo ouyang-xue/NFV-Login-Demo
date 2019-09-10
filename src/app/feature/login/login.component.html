@@ -7,13 +7,10 @@
             <div class="login-info">
                 <span>
                     <input type="text" class="username" name="username" pInputText placeholder="Username"
-                        [(ngModel)]="loginFormData.username" required minlength="{{ unameMinLen }}" #uname="ngModel" />
+                        [(ngModel)]="loginFormData.username" required  #uname="ngModel" />
                     <div *ngIf="uname.invalid && (uname.dirty || uname.touched)" class="errMsg">
                         <div *ngIf="uname.errors.required">
                             Username is required.
-                        </div>
-                        <div *ngIf="uname.errors.minlength">
-                            Username must be at least {{ unameMinLen }} characters long.
                         </div>
                     </div>
     
@@ -23,18 +20,11 @@
             <div class="login-info">
                 <div>
                     <input type="password" class="password" name="password" pInputText placeholder="Password"
-                        [(ngModel)]="loginFormData.pwd" required minlength="{{ psdMinLen }}"
-                        maxlength="{{ psdMaxLen }}" #pwd="ngModel" />
+                        [(ngModel)]="loginFormData.pwd" required #pwd="ngModel" />
     
                     <div *ngIf="pwd.invalid && (pwd.dirty || pwd.touched)" class="errMsg">
                         <div *ngIf="pwd.errors.required">
                             Password is required.
-                        </div>
-                        <div *ngIf="pwd.errors.minlength">
-                            Password must be at least {{ psdMinLen }} characters long.
-                        </div>
-                        <div *ngIf="pwd.errors.maxlength">
-                            Password must be at most {{ psdMaxLen }} characters long.
                         </div>
                     </div>
     
