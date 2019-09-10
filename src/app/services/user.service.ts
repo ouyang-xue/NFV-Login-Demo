@@ -22,7 +22,7 @@ export class UserService {
   }
 
   editUser(user: User): Observable<User> {
-    return this.http.put<User>(`/s_users/${user._id}/`, user);
+    return this.http.patch<User>(`/s_users/${user._id}/`, user);
   }
 
   deleteUser(id: number): Observable<any> {
