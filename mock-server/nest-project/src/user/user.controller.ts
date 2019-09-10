@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body,UseGuards,Put,Param,Delete,UseInterceptors} from '@nestjs/common';
+import { Controller, Get, Post, Body,UseGuards,Put,Patch,Param,Delete,UseInterceptors} from '@nestjs/common';
 import{UsersDto} from './dto/UsersDto'
 import {UserService} from './user.service'
 import {User} from './interfaces/User.Interface'
@@ -27,7 +27,7 @@ export class UserController {
     return u;
   }
 
-  @Put(':id')
+  @Patch(':id')
   async edit(@Param('id', new ValidationPipe())id:string,@Body() userDto: UsersDto){
     return await this.userService.edit(id,userDto);
   }
