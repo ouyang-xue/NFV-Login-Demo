@@ -52,15 +52,15 @@ export class LoginComponent implements OnInit {
     this.cloneFormData.username = this.loginFormData.username;
     this.cloneFormData.pwd = Md5.hashStr(this.loginFormData.pwd).toString();
 
-    this.service.login(this.cloneFormData).subscribe((loginData: any) => {
+    console.log(this.cloneFormData);
 
+    this.service.login(this.cloneFormData).subscribe((loginData: any) => {
         this.authService.setAuthorizationToken(loginData.token);
         this.service.saveLoginInfo(loginData.user._id.toString(), loginData.user.role);
         this.router.navigate(['/users']);
-
-    }, (error: any) => {
+    }, (errorData: any) => {
       this.warningMsg = [];
-      this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:error.error.error});
+      this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:errorData.error.error});
     });
 
   }
