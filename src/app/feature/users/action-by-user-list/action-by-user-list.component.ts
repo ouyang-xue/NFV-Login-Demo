@@ -33,7 +33,7 @@ export class ActionByUserListComponent implements ICellRendererAngularComp {
     return false;
   }
   edit() {
-    this.params.context.componentParent.editItem(this.params.value);
+    this.params.context.componentParent.editItem(this.params);
   }
   view(){
     this.params.context.componentParent.viewItem(this.params);

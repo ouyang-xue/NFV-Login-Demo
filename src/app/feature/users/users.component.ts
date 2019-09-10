@@ -122,8 +122,8 @@ export class UsersComponent implements OnInit {
     this.router.navigate(["/add-user"]);
   }
 
-  public editItem(id: any) {
-    this.router.navigateByUrl("/edit-user?id=" + id);
+  public editItem(params: any) {
+    this.router.navigateByUrl("/edit-user?id=" + params.data._id);
   }
 
   public delItem(params: any) {
@@ -132,6 +132,14 @@ export class UsersComponent implements OnInit {
       header: 'Delete User',
       accept: () => {
         this.userService.deleteUser(params.data._id).subscribe(() => this.queryDatas());
+      //   this.http.delete('http://localhost:3000/s_user/' +params.data._id ,
+      //                 {headers: new HttpHeaders({"Authorization":window.localStorage.getItem("auth_token")})})
+      //                 .toPromise()
+      // .then((data: any) => {
+      //   this.queryDatas();
+      // })
+      // .catch(err => { console.log(err);
+      // });
       }
     });
   }
