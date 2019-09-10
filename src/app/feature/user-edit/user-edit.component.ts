@@ -60,8 +60,8 @@ export class UserEditComponent implements OnInit {
     if (this.user._id == 0) {
       this.userService.getUsers().subscribe(serverUsers =>{
         this.users = serverUsers
-        const id = this.users[this.users.length - 1].id + 1;
-        this.user._id = id;
+        const _id = this.users[this.users.length - 1]._id + 1;
+        this.user._id = _id;
         this.user.pwd = Md5.hashStr(this.user.pwd).toString();
         this.userService.addUser(this.user).subscribe(userData => {
           this.user = userData;
