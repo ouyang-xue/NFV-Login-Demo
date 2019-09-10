@@ -77,6 +77,8 @@ export class UserEditComponent implements OnInit {
           this.router.navigate(["/users"]);
         },
         (error: any) => {
+          console.log("---------------------" + error);
+          
           this.warningMsg = [];
           this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:error.error.error});
         }
