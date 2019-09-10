@@ -6,13 +6,29 @@ import { ICellRendererAngularComp } from "ag-grid-angular";
   styleUrls: ['./action-by-user-list.component.scss']
 })
 export class ActionByUserListComponent implements ICellRendererAngularComp {
-
+  isVisibility :boolean = false;
   constructor() { 
   }
   public params: any;
   agInit(params: any): void {
     this.params = params;
+    this.showDel(this.params);
   }
+
+  showDel(paramsSel: any){
+    var idSel = paramsSel.data._id;
+    var idLogin = window.localStorage.getItem("id");
+    console.log("idLogin",idLogin);
+    console.log("idSel",idSel);
+    console.log("==",idSel === idLogin);
+    if(idSel === idLogin){
+      console.log("paramsSel",paramsSel);
+      this.isVisibility = false;
+    } else {
+      this.isVisibility = true;
+    }
+  }
+
   refresh(): boolean {
     return false;
   }

@@ -40,15 +40,16 @@ export class UsersComponent implements OnInit {
       valueGetter: function (params) {
         var country = params.data.role;
         console.log("country", country);
-        if (country === 0) {
+        if (country === 1) {
           return "Admin";
-        } else if (country === 1) {
-          return "User";
         } else if (country === 2) {
+          return "User";
+        } else if (country === 3) {
           return "Other";
         }
       },
     },
+   // 管理员才添加
     {
       // 属性是可以重复设置到多个列的
       headerName: "...",
@@ -112,6 +113,10 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.data.subscribe(res => this.title = res.pageTitle);
+    var role = window.localStorage.getItem("role");
+    if(!(role === '1')){
+      this.columnDefs.splice(this.columnDefs.length -1 ,1);
+    }
   }
   public addItem() {
     this.router.navigate(["/add-user"]);
@@ -126,7 +131,7 @@ export class UsersComponent implements OnInit {
       message: 'Are you sure you want to delete ' + params.data.username + '?',
       header: 'Delete User',
       accept: () => {
-        this.userService.deleteUser(params.value).subscribe(() => this.queryDatas());
+        this.userService.deleteUser(params.data._id).subscribe(() => this.queryDatas());
       }
     });
   }
