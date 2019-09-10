@@ -21,7 +21,7 @@ export class UserEditComponent implements OnInit {
   users: any[] = [];
   role: SelectItem[];
   user: User = {
-    id: 0,
+    _id: 0,
     fullname: '',
     username: '',
     pwd: '',
@@ -57,11 +57,11 @@ export class UserEditComponent implements OnInit {
   }
 
   submit() {
-    if (this.user.id == 0) {
+    if (this.user._id == 0) {
       this.userService.getUsers().subscribe(serverUsers =>{
         this.users = serverUsers
         const id = this.users[this.users.length - 1].id + 1;
-        this.user.id = id;
+        this.user._id = id;
         this.user.pwd = Md5.hashStr(this.user.pwd).toString();
         this.userService.addUser(this.user).subscribe(userData => {
           this.user = userData;

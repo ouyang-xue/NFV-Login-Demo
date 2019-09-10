@@ -10,22 +10,22 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>("/users/");
+    return this.http.get<User[]>("/s_users/");
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>("/users?id=" + id);
+    return this.http.get<User>("/s_users?id=" + id);
   }
 
   addUser(user: User): Observable<User> {
-    return this.http.post<User>("/users", user);
+    return this.http.post<User>("/s_users", user);
   }
 
   editUser(user: User): Observable<User> {
-    return this.http.patch<User>(`/users/${user.id}`, user);
+    return this.http.patch<User>(`/s_users/${user._id}`, user);
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete('/users/' + id);
+    return this.http.delete('/s_users/' + id);
   }
 }
