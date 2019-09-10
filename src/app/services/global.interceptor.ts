@@ -15,12 +15,11 @@ export class GlobalInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let httpReq: HttpRequest<any> = req;
 
-        console.log("##################  GlobalInterceptor ");
-        
-
         const token = this.authService.getAuthorizationToken();
+        console.log(`##################  GlobalInterceptor : ${token}`);
+
         if(token) {
-            httpReq = req.clone( {headers: req.headers.set('X-Access-Token', token)});
+            httpReq = req.clone( {headers: req.headers.set('Authorization', token)});
         }
         return next.handle(httpReq).pipe(
             catchError((err, caught) => {
