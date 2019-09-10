@@ -17,8 +17,8 @@ export class UserService {
     return this.http.get<User>("/s_users?id=" + id);
   }
 
-  addUser(user: User): Observable<User> {
-    return this.http.post<User>("/s_users", user);
+  addUser(user: AddUser): Observable<AddUser> {
+    return this.http.post<AddUser>("/s_users", user);
   }
 
   editUser(user: User): Observable<User> {
@@ -26,6 +26,6 @@ export class UserService {
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete('/s_users/' + id);
+    return this.http.delete(`/s_users/${id}`);
   }
 }

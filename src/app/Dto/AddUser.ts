@@ -1,5 +1,4 @@
-class User {
-    _id: string;
+class AddUser {
     username: string;
     fullname: string;
     pwd: string;
