@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   warningMsg: Message[] = [];
 
   loginFormData: User = {
-    _id: 0,
+    _id: '',
     username: '',
     fullname: '',
     pwd: '',
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   cloneFormData: User = {
-    _id: 0,
+    _id: '',
     username: '',
     fullname: '',
     pwd: '',

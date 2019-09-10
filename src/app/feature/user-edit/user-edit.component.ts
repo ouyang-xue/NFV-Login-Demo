@@ -16,16 +16,22 @@ export class UserEditComponent implements OnInit {
   public psdMinLen: number = 4;
   public psdMaxLen: number = 16;
   public btnDisplay: number = 0;
-  private id:number = 0;
+  private id:string = null;
   private title:string = "add";
   users: any[] = [];
   role: SelectItem[];
   user: User = {
-    _id: 0,
+    _id: null,
     fullname: '',
     username: '',
     pwd: '',
-    role: 0
+    role: 1
+  }
+  addUser: AddUser = {
+    fullname: '',
+    username: '',
+    pwd: '',
+    role: 1
   }
 
   constructor(
@@ -34,9 +40,9 @@ export class UserEditComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private userService: UserService) {
       this.role = [
-        { label: 'Admin', value: '0' },
-        { label: 'Bussiness', value: '1' },
-        { label: 'User', value: '2' }
+        { label: 'Admin', value: '1' },
+        { label: 'Bussiness', value: '2' },
+        { label: 'User', value: '3' }
       ];
   }
   
@@ -46,10 +52,13 @@ export class UserEditComponent implements OnInit {
       this.activeRoute.queryParams.subscribe((params: Params) => {
         this.id = params['id'];
       });
+      
       if(this.id!=null){
         this.labelBtn = "Edit";
         this.btnDisplay = 1;
-        this.userService.getUserById(this.id).subscribe(userdata => this.user = userdata[0]);
+        this.userService.getUserById(this.id).subscribe(userdata => {
+          this.user = userdata[0];
+        })
       }else{
         this.router.navigate(["/users"]);
       }
@@ -57,17 +66,14 @@ export class UserEditComponent implements OnInit {
   }
 
   submit() {
-    if (this.user._id == 0) {
-      this.userService.getUsers().subscribe(serverUsers =>{
-        this.users = serverUsers
-        const _id = this.users[this.users.length - 1]._id + 1;
-        this.user._id = _id;
-        this.user.pwd = Md5.hashStr(this.user.pwd).toString();
-        this.userService.addUser(this.user).subscribe(userData => {
-          this.user = userData;
+    if (this.user._id == null) {
+        this.addUser.pwd = Md5.hashStr(this.user.pwd).toString();
+        this.addUser.fullname = this.user.fullname;
+        this.addUser.username = this.user.username;
+        this.addUser.role = this.user.role;
+        this.userService.addUser(this.addUser).subscribe(userData => { 
           this.router.navigate(["/users"]);
         });
-      });
     } else {
       this.userService.editUser(this.user).subscribe(userData => {
         this.user = userData;
