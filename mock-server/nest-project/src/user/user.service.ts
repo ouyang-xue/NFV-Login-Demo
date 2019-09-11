@@ -13,7 +13,7 @@ export class UserService {
     async create(userDto: UsersDto): Promise<string> {
         const u = await this.userModel.findOne({"username":userDto.username});
         if(u){
-          throw new ApiException('用户已存在',ApiErrorCode.USER_ID_HAS_EXSIT,HttpStatus.BAD_REQUEST)
+          throw new ApiException('The username already exists.',ApiErrorCode.USER_ID_HAS_EXSIT,HttpStatus.BAD_REQUEST)
         }
         const createUser = new this.userModel(userDto);
         return await createUser.save();
@@ -31,7 +31,7 @@ export class UserService {
         const user = await this.userModel.findOne({"username":loginDTO.username,"pwd":loginDTO.pwd});
         console.log(user);
         if(!user){
-          throw new ApiException('用户名或密码错误',ApiErrorCode.LONGIN_FAIL,HttpStatus.BAD_REQUEST)
+          throw new ApiException('The username does not exist or the password is incorrect.',ApiErrorCode.LONGIN_FAIL,HttpStatus.BAD_REQUEST)
         }
         return user;
       }
@@ -51,10 +51,10 @@ export class UserService {
       
       async edit(id:string,userDto: UsersDto){
         const u:User[] = await this.userModel.find({"username":userDto.username});
-        console.log("=================")
-        console.log(u);
+        // console.log("=================")
+        // console.log(u);
         if(u!=null&&u.length>1){
-            throw new ApiException('用户名已存在',ApiErrorCode.USER_ID_HAS_EXSIT,HttpStatus.BAD_REQUEST)
+            throw new ApiException('The username already exists.',ApiErrorCode.USER_ID_HAS_EXSIT,HttpStatus.BAD_REQUEST)
         }
         return await this.userModel.update({"_id":id},userDto)
       }
