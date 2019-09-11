@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -23,7 +24,7 @@ export class GlobalInterceptor implements HttpInterceptor {
         }
         return next.handle(httpReq).pipe(
             catchError((err, caught) => {
-                console.log(err);
+                console.log("********** " + JSON.stringify(err));
                 return this.handleAuthError(err);
             })
         ) as any;
@@ -39,7 +40,7 @@ export class GlobalInterceptor implements HttpInterceptor {
             // unless you also want downstream consumers to have to handle it as well.
             return of(err.message);
         }
-        return Observable.throw(err);
+        return throwError(err);
     }
     
 }

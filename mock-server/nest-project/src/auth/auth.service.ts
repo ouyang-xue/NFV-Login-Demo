@@ -23,7 +23,7 @@ export class AuthService {
         user:user
       }
     }else{
-      return "用户名不存在"
+      return "The username does not exists."
     }
   }
 

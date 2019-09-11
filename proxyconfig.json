@@ -1,11 +1,11 @@
 {
-    "/s_login**": {
+    "/s_login/**": {
       "target": "http://localhost:3000",
       "secure": false,
       "rejectUnhauthorized": false,
       "logLevel": "debug"
     },
-    "/s_users**": {
+    "/s_users/**": {
       "target": "http://localhost:3000",
       "secure": false,
       "rejectUnhauthorized": false,

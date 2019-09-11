@@ -1,9 +1,11 @@
 <div class="parent">
     <header class="content">
         <div class="right">
-            <ol>
+            <span class="username">{{username}}</span>
+            <span class="fa fa-sign-out logout" (click)="logout()"></span>
+            <!-- <ol>
                 <li class="fa fa-sign-out" (click)="logout()"></li>
-            </ol>
+            </ol> -->
         </div>
 
         <div class="left">

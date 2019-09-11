@@ -17,12 +17,12 @@ export class UserService {
     return this.http.get<User>('/s_users/' + id);
   }
 
-  addUser(user: AddUser): Observable<User> {
-    return this.http.post<User>("/s_users", user);
+  addUser(user: AddUser): Observable<AddUser> {
+    return this.http.post<User>("/s_users/", user);
   }
 
   editUser(user: User): Observable<User> {
-    return this.http.patch<User>(`/s_users/${user._id}`, user);
+    return this.http.patch<User>(`/s_users/${user._id}/`, user);
   }
 
   deleteUser(id: number): Observable<any> {

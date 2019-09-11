@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router ,Params ,ActivatedRoute} from '@angular/router'
 import {Md5} from 'ts-md5'; 
 import { UserService } from 'src/app/services/user.service';
-
+import {Message} from 'primeng/components/common/api';
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
@@ -33,7 +33,7 @@ export class UserEditComponent implements OnInit {
     pwd: '',
     role: 1
   }
-
+  warningMsg: Message[] = [];
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -45,6 +45,7 @@ export class UserEditComponent implements OnInit {
         { label: 'User', value: '3' }
       ];
   }
+  i: number = 0;
   
   ngOnInit() {
     this.activeRoute.data.subscribe(res => this.title = res.pageTitle);
@@ -52,12 +53,11 @@ export class UserEditComponent implements OnInit {
       this.activeRoute.queryParams.subscribe((params: Params) => {
         this.id = params['id'];
       });
-      
       if(this.id!=null){
         this.labelBtn = "Edit";
         this.btnDisplay = 1;
-        this.userService.getUserById(this.id).subscribe(userdata => {
-          this.user = userdata[0];
+        this.userService.getUserById(this.id).subscribe((userdata: any) => {
+          this.user = userdata;
         })
       }else{
         this.router.navigate(["/users"]);
@@ -67,17 +67,32 @@ export class UserEditComponent implements OnInit {
 
   submit() {
     if (this.user._id == null) {
-        this.addUser.pwd = Md5.hashStr(this.user.pwd).toString();
-        this.addUser.fullname = this.user.fullname;
-        this.addUser.username = this.user.username;
-        this.addUser.role = this.user.role;
+      
+      this.addUser.pwd = Md5.hashStr(this.user.pwd).toString();
+      this.addUser.fullname = this.user.fullname;
+      this.addUser.username = this.user.username;
+      this.addUser.role = this.user.role;
+      console.log(this.addUser);
         this.userService.addUser(this.addUser).subscribe(userData => { 
           this.router.navigate(["/users"]);
-        });
+        },
+        (error: any) => {
+          console.log("---------------------" + error);
+          
+          this.warningMsg = [];
+          this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:error.error.error});
+        }
+        );
     } else {
+      console.log(this.user);
+      
       this.userService.editUser(this.user).subscribe(userData => {
         this.user = userData;
         this.router.navigate(["/users"]);
+      },
+      (error: any) => {
+        this.warningMsg = [];
+        this.warningMsg.push({severity:'warn', summary:'Warn Message: ', detail:error.error.error});
       });
     }
   }

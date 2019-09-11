@@ -23,9 +23,19 @@ header {
     float: right;
 }
 
-li {
+.username {
+    margin: 0 1em;
+    font-size: .7em;
+}
+
+.logout {
     font-size: 1em;
     margin-right: .5em;
+}
+
+.logout:hover {
+    color: rgb(0, 204, 255);
+    cursor: pointer;
 }
 
 li:hover {
