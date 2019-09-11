@@ -3,15 +3,12 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { GlobalVariable } from '../common/globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-
-  _ID: string = "id";
-  ROLE: string = "role";
-
 
   constructor(
     private http: HttpClient,
@@ -28,7 +25,7 @@ export class LoginService {
   }
 
   saveLoginInfo(id: string, role: string) {
-    window.localStorage.setItem(this._ID, `${id}`);
-    window.localStorage.setItem(this.ROLE, `${role}`);
+    window.localStorage.setItem(GlobalVariable.userId, `${id}`);
+    window.localStorage.setItem(GlobalVariable.userRole, `${role}`);
   }
 }
