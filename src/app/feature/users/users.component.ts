@@ -43,13 +43,13 @@ export class UsersComponent implements OnInit {
         if (country === 1) {
           return "Admin";
         } else if (country === 2) {
-          return "User";
+          return "Bussiness";
         } else if (country === 3) {
-          return "Other";
+          return "User";
         }
       },
     },
-   // 管理员才添加
+    // 管理员才添加
     {
       // 属性是可以重复设置到多个列的
       headerName: "...",
@@ -63,7 +63,7 @@ export class UsersComponent implements OnInit {
     }
   ];
 
- public defaultColDef = {
+  public defaultColDef = {
     sortable: true,
     filter: true,
     resizable: true,
@@ -114,8 +114,8 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.activeRoute.data.subscribe(res => this.title = res.pageTitle);
     var role = window.localStorage.getItem("role");
-    if(!(role === '1')){
-      this.columnDefs.splice(this.columnDefs.length -1 ,1);
+    if (!(role === '1')) {
+      this.columnDefs.splice(this.columnDefs.length - 1, 1);
     }
   }
   public addItem() {
@@ -132,14 +132,6 @@ export class UsersComponent implements OnInit {
       header: 'Delete User',
       accept: () => {
         this.userService.deleteUser(params.data._id).subscribe(() => this.queryDatas());
-      //   this.http.delete('http://localhost:3000/s_user/' +params.data._id ,
-      //                 {headers: new HttpHeaders({"Authorization":window.localStorage.getItem("auth_token")})})
-      //                 .toPromise()
-      // .then((data: any) => {
-      //   this.queryDatas();
-      // })
-      // .catch(err => { console.log(err);
-      // });
       }
     });
   }
@@ -148,8 +140,7 @@ export class UsersComponent implements OnInit {
     this.isView = true;
   }
 
-  getChildEvent(){
-    console.log("111111111111111111111");
+  getChildEvent() {
     this.isView = false;
   }
 
