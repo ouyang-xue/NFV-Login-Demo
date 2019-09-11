@@ -1,6 +1,9 @@
 <form #btnD="ngForm" action="">
     <div class="content">
         <div class="box">
+            <div class="warningMsg">
+                    <p-messages [(value)]="warningMsg"></p-messages>
+                </div>
             <div class="full-name">
                 <span class="label">Full name</span>
                 <div class="ui-inputgroup component-group">
@@ -30,19 +33,21 @@
                     </span>
                 </div>
             </div>
-            <div class="user-name">
+            <div *ngIf="btnDisplay===0" class="user-name">
                 <span class="label">Username</span>
                 <div class="ui-inputgroup component-group">
                     <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                    <input name="username"
+                    <input id = 'username' name="username"
                         class="component"
-                        [(ngModel)]="user.username" 
+                        [(ngModel)]="user.username"
+                        [ngClass]="{'component-display': true}" 
                         required type="text" 
                         pInputText
                         placeholder="Username" 
                         #username="ngModel" 
                         minlength={{psdMinLen}} 
                         maxlength={{psdMaxLen}} />
+                    
                 </div>
                 <div class="err">
                     <span  *ngIf="username.invalid && (username.dirty || username.touched)"   class="errMsg">
@@ -57,9 +62,7 @@
                         </span>
                     </span>
                 </div>
-                <div class="warningMsg">
-                    <p-messages [(value)]="warningMsg"></p-messages>
-                </div>
+                
             </div>
             <div *ngIf="btnDisplay===0" class="password">
                 <span class="label">Password</span>
