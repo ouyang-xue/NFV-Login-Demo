@@ -53,6 +53,7 @@ export class UserEditComponent implements OnInit {
       this.activeRoute.queryParams.subscribe((params: Params) => {
         this.id = params['id'];
       });
+      (document.getElementsByName('username')[0] as HTMLInputElement).setAttribute('disabled','true');
       if(this.id!=null){
         this.labelBtn = "Edit";
         this.btnDisplay = 1;

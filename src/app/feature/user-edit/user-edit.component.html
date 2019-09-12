@@ -33,14 +33,13 @@
                     </span>
                 </div>
             </div>
-            <div *ngIf="btnDisplay===0" class="user-name">
+            <div  class="user-name">
                 <span class="label">Username</span>
                 <div class="ui-inputgroup component-group">
                     <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
                     <input id = 'username' name="username"
                         class="component"
                         [(ngModel)]="user.username"
-                        [ngClass]="{'component-display': true}" 
                         required type="text" 
                         pInputText
                         placeholder="Username" 
