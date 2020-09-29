@@ -5,6 +5,7 @@ describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {
+    browser.sleep(1000);
     page = new AppPage();
   });
 

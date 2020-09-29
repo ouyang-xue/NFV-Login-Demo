@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     pwd: '',
     role: 0
   }
-  
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -46,17 +46,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  
+
   loginData() {
 
     this.cloneFormData.username = this.loginFormData.username;
     this.cloneFormData.pwd = Md5.hashStr(this.loginFormData.pwd).toString();
 
-    console.log(this.cloneFormData);
-
     this.service.login(this.cloneFormData).subscribe((loginData: any) => {
         this.authService.setAuthorizationToken(loginData.token);
-        this.service.saveLoginInfo(loginData.user._id.toString(), loginData.user.role);
+        this.service.saveLoginInfo(loginData.user._id, loginData.user.role);
         this.router.navigate(['/users']);
     }, (errorData: any) => {
       this.warningMsg = [];

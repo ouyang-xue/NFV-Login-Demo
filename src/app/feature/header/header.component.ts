@@ -22,7 +22,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     const userId = window.localStorage.getItem(GlobalVariable.userId);
     if(userId) {
-      this.userService.getUserById(userId).subscribe(user => this.username = user.username);
+      this.userService.getUserById(userId).subscribe((user: any) => {
+        this.username = user.username;
+      });
     }
   }
 
